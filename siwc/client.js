@@ -34,27 +34,28 @@ function updateButtons(){
 }
 async function check(){
  try{
-  const s=await api('status');connected=s.connected&&s.planAuthorized;
+  const s=await api('status');connected=s.connected&&s.planAuthorized;$('provider').value=state.provider;
   $('connection').textContent=connected?'● ChatGPT authorized':'● Not connected';$('connection').className='state '+(connected?'connected':'error');
-  $('signin').hidden=connected;
+  $('signin').hidden=connected||state.provider==='9router';
   if(connected){
    const m=await api('models');const select=$('model');select.replaceChildren();
    for(const a of m.models){const option=document.createElement('option');option.value=a.model;option.textContent=a.label||a.model;select.append(option)}
    if(!state.model&&!m.models.length)throw Error('No eligible models');
-   if(!m.models.some(m=>m.model===state.model))state.model=m.models.find(m=>m.model==='gpt-6-sol')?.model||m.models[0].model;
+   if(!m.models.some(m=>m.model===state.model))state.model=m.models.find(m=>m.model==='gpt-6-sol')?.model||m.models[0]?.model||'';
    select.value=state.model;await api('model',{model:state.model});
   }
  }catch(e){connected=false;$('connection').textContent='● '+e.message;$('connection').className='state error'}
  updateButtons();
 }
 $('signin').onclick=async()=>{try{await api('login',{});$('connection').textContent='Complete sign-in in browser';setTimeout(check,10000)}catch(e){alert(e.message)}};
+$('provider').onchange=async()=>{try{const next=$('provider').value;const result=await api('provider',{provider:next});state.provider=result.provider;state.model=result.model;renderChat();await check()}catch(e){alert(e.message)}};
 $('model').onchange=async()=>{try{state.model=$('model').value;await api('model',{model:state.model});updateButtons()}catch(e){alert(e.message)}};
 $('clear').onclick=async()=>{if(!confirm('ล้างประวัติสนทนาของบอทนี้?'))return;try{await api('clear',{agent:selected});delete state.threads[String(selected)];renderChat()}catch(e){alert(e.message)}};
 $('prompt').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('chat-form').requestSubmit()}};
 $('chat-form').onsubmit=async(e)=>{
  e.preventDefault();const input=$('prompt').value.trim();if(!input||busy||!connected||!state.model)return;
  busy=true;$('prompt').value='';const agent=selected;renderChat();bubble('user',input);updateButtons();
- try{const result=await api('chat',{agent,text:input});state.threads[String(agent)]=result.history;if(selected===agent)renderChat()}
+ try{const result=await api('chat',{agent,text:input});state.threads[state.provider+':'+String(agent)]=result.history;if(selected===agent)renderChat()}
  catch(err){if(selected===agent)bubble('assistant','⚠ '+err.message);$('prompt').value=input}
  finally{busy=false;updateButtons()}
 };
