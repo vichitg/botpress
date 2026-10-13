@@ -21,6 +21,8 @@ const clientJs=fs.readFileSync(new URL('./client.js',import.meta.url));
 const showcaseHtml=fs.readFileSync(new URL('./showcase.html',import.meta.url));
 const showcaseCss=fs.readFileSync(new URL('./showcase.css',import.meta.url));
 const showcaseJs=fs.readFileSync(new URL('./showcase.js',import.meta.url));
+const arenaHtml=fs.readFileSync(new URL('./arena.html',import.meta.url));
+const arenaJs=fs.readFileSync(new URL('./arena.js',import.meta.url));
 const safe=async(req)=>{let s='';for await(const c of req){s+=c;if(s.length>160000)throw Error('Request too large')}return JSON.parse(s||'{}')};
 const gateway='http://127.0.0.1:17455';
 async function proxy(route,method='GET',body){const r=await fetch(gateway+route,{method,headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined});const j=await r.json();if(!r.ok)throw Error(j.error||'Gateway unavailable');return j}
@@ -32,6 +34,8 @@ const server=http.createServer(async(req,res)=>{try{
  if(req.method==='GET'&&url.pathname==='/showcase'){res.writeHead(200,{'content-type':'text/html; charset=utf-8','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'"});res.end(showcaseHtml);return}
  if(req.method==='GET'&&url.pathname==='/showcase.css'){res.writeHead(200,{'content-type':'text/css; charset=utf-8','cache-control':'no-store'});res.end(showcaseCss);return}
  if(req.method==='GET'&&url.pathname==='/showcase.js'){res.writeHead(200,{'content-type':'application/javascript; charset=utf-8','cache-control':'no-store'});res.end(showcaseJs);return}
+ if(req.method==='GET'&&url.pathname==='/arena'){res.writeHead(200,{'content-type':'text/html; charset=utf-8','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'"});res.end(arenaHtml);return}
+ if(req.method==='GET'&&url.pathname==='/arena.js'){res.writeHead(200,{'content-type':'application/javascript; charset=utf-8','cache-control':'no-store'});res.end(arenaJs);return}
  if(req.method==='GET'&&url.pathname==='/api/state')return send(res,200,data);
  if(req.method==='GET'&&url.pathname==='/api/status'){if(data.provider==='9router'){try{await nineModels();return send(res,200,{connected:nineConfigured(),planAuthorized:nineConfigured(),provider:'9router',error:nineConfigured()?null:'9Router API key required: configure in local dashboard'})}catch(e){return send(res,200,{connected:false,planAuthorized:false,provider:'9router',error:e.message})}}return send(res,200,{...await proxy('/status'),provider:'chatgpt'})}
  if(req.method==='GET'&&url.pathname==='/api/models')return send(res,200,data.provider==='9router'?{models:await nineModels()}:await proxy('/models'));
