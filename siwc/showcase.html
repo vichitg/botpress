@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="th"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'">
+<title>BotPress · AI Newsroom Live</title><link rel="stylesheet" href="/showcase.css">
+</head><body>
+<div class="orb glow1"></div><div class="orb glow2"></div>
+<div class="frame">
+<header class="nav"><div class="brand"><div class="logo">✦</div><div>BOT<span>PRESS</span><small>LIVE AI NEWSROOM</small></div></div>
+<div class="nav-right"><span class="pill outline" id="auth-label">CONNECTING</span><a href="/">← WORKBENCH</a><span class="pill beta">SHOWCASE / 01</span></div></header>
+<div class="hero"><div class="eyebrow"><span class="live-dot"></span> LIVE MODEL INFERENCE <span class="dash">—</span> CHATGPT SUBSCRIPTION / SIWC</div>
+<h1>หนึ่งไอเดีย.<br><em>สี่สมอง AI.</em> หนึ่งภารกิจ.</h1>
+<p class="lead">สัมผัสการทำงานแบบ AI Newsroom: บอท 4 บทบาทสร้างข่าว วิเคราะห์กลยุทธ์ ตรวจข้อเท็จจริง และสรุปให้บรรณาธิการพิจารณา ผ่าน OpenAI Responses API จริง</p>
+<div class="stats"><div><strong>15</strong><span>AI PERSONAS</span></div><div><strong>04</strong><span>LIVE STAGES</span></div><div><strong id="requests">0</strong><span>SUCCESSFUL CALLS</span></div><div><strong id="clock">00:00</strong><span>ELAPSED</span></div></div></div>
+<div class="controls"><div><label>DEMO MISSION</label><textarea id="topic" rows="2">ออกแบบสำนักข่าว AI สำหรับบริษัท ที่สามารถสร้างข่าวเทคโนโลยีคุณภาพสูงโดยมีคนตรวจอนุมัติก่อนเผยแพร่ สรุปเป็นแผนต้นแบบที่ทำได้จริง</textarea></div>
+<div class="action"><label>AI MODEL</label><div class="action-line"><select id="model"><option value="gpt-6-sol">gpt-6-sol</option></select><button id="run">▶ START LIVE MISSION</button></div></div></div>
+<div class="section-header"><div><span class="kicker">THE PIPELINE</span><h2>AI Newsroom in motion</h2></div><div id="progress">READY TO LAUNCH</div></div>
+<div class="pipeline">
+<div class="stage" id="stage0"><div class="num">01 <span>RESEARCH</span></div><div class="glyph">◈</div><h3>นักข่าว AI</h3><p>สืบค้นเชิงแนวคิด · เขียนโครงเรื่อง</p><div class="stage-foot" id="status0">WAITING</div></div>
+<div class="arrow">⟶</div>
+<div class="stage" id="stage1"><div class="num">02 <span>STRATEGY</span></div><div class="glyph">⌘</div><h3>หัวหน้าข่าว</h3><p>จัดลำดับ · วางแผนผลิตข่าว</p><div class="stage-foot" id="status1">WAITING</div></div>
+<div class="arrow">⟶</div>
+<div class="stage" id="stage2"><div class="num">03 <span>FACT CHECK</span></div><div class="glyph">◇</div><h3>ผู้ตรวจข่าว</h3><p>ตรวจสอบความน่าเชื่อถือ · ชี้จุดเสี่ยง</p><div class="stage-foot" id="status2">WAITING</div></div>
+<div class="arrow">⟶</div>
+<div class="stage" id="stage3"><div class="num">04 <span>EDITOR</span></div><div class="glyph">✧</div><h3>บก.บริหาร</h3><p>สรุปงาน · ขออนุมัติจากมนุษย์</p><div class="stage-foot" id="status3">WAITING</div></div>
+</div>
+<div class="results-head"><div><span class="kicker">INTELLIGENCE FEED</span><h2>Live output <span id="output-note">— press Start to begin</span></h2></div><button id="copy" class="outline-btn">EXPORT REPORT .MD ↗</button></div>
+<div class="results" id="results"><div class="placeholder"><span class="spin">✦</span><strong>READY FOR LAUNCH</strong><p>กด START LIVE MISSION เพื่อเริ่มการสาธิตผ่านโมเดลจริง</p></div></div>
+<footer><div><span class="live-dot"></span> BotPress · Powered by your ChatGPT plan</div><div>DEMO ORCHESTRATION ONLY — not autonomous Rakazo routines or external web verification</div></footer>
+</div><script src="/showcase.js" defer></script>
+</body></html>
