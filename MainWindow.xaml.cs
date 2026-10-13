@@ -194,6 +194,8 @@ public partial class MainWindow : Window
             case "rakazo.revive": await Task.Run(Monitor.ReviveComputers); return null;
             case "rakazo.web": await OpenRakazoWeb(Arg("path")); return null;
             case "bot.terminal": await OpenTerminal(Arg("botId"), Arg("name")); return null;
+            case "siwc.status": return await SiwcGateway.Status();
+            case "siwc.login": return await SiwcGateway.Login();
             case "llm.mode": return await RakazoClient.GetLlmMode();
             case "llm.mode.set": return await RakazoClient.SetLlmMode(Arg("mode"));
             case "rk": return await RakazoClient.Call(Arg("path"), args?["input"]);

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'">
+<title>BotPress · ChatGPT Workbench</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+ <div class="brand"><div class="mark">✦</div><div><strong>BotPress</strong><small>ChatGPT Workbench</small></div></div>
+ <div class="caption">TEAM WORKSPACE <span>15 AGENTS</span></div>
+ <div id="agent-list" class="agent-list"></div>
+ <div class="sidebar-foot"><span class="indicator"></span><span>Prototype: Team chat only</span></div>
+</aside>
+<div class="workspace">
+ <header class="topbar"><div class="top-title"><span class="pill">SIWC</span><strong>Connected to ChatGPT</strong><span id="connection" class="state">Checking...</span></div>
+  <div class="controls"><label for="model">MODEL</label><select id="model"><option>Loading...</option></select><button id="signin" class="secondary">Connect ChatGPT</button></div>
+ </header>
+ <main class="chat"><div class="chat-head"><div id="avatar" class="avatar">AI</div><div><h1 id="agent-name"></h1><p id="agent-role"></p></div><button id="clear" class="secondary subtle">Clear chat</button></div>
+ <div id="chat-history" class="messages"><div class="empty"><div class="empty-glyph">✧</div><h2>พร้อมเริ่มทำงานกับทีม AI</h2><p>เลือกบอทด้านซ้ายเพื่อเริ่มสนทนาด้วยโมเดล ChatGPT ของคุณ</p></div></div>
+ <form id="chat-form" class="composer"><textarea id="prompt" rows="2" placeholder="พิมพ์ข้อความถึง AI Agent... (Enter เพื่อส่ง, Shift+Enter ขึ้นบรรทัดใหม่)"></textarea><button id="send" type="submit">ส่งข้อความ ↗</button></form>
+ <div class="footnote">การทดลองแชตผ่าน Responses API จริง · ประวัติเก็บในเครื่องนี้ · ยังไม่เชื่อม Rakazo/Routines/Tool Calling</div></main>
+</div></div>
+<script src="/client.js" defer></script>
+</body></html>

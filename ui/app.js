@@ -248,8 +248,10 @@ const App = (() => {
       <div class="nav ${current && current.type === "desk" ? "active" : ""}" data-go="desk">${icon("book")}<span class="grow">โต๊ะข่าว</span></div>
       <div class="nav ${current && current.type === "work" ? "active" : ""}" data-go="work">${icon("inbox")}
         <span class="grow">ศูนย์งาน</span>${store.waiting ? `<span class="badge" title="งานที่รอคุณ">${store.waiting}</span>` : ""}</div>
+      <div class="nav" id="siwc-login" title="Connect ChatGPT plan (SIWC preview)"><span class="grow">Continue with ChatGPT (Preview)</span></div>
       <div class="nav ${current && current.type === "monitor" ? "active" : ""}" data-go="monitor">${icon("activity")}
         <span class="grow">Monitor${q}</span><span class="dot ${llmDot}" title="LLM"></span><span class="dot ${rkDot}" title="Rakazo"></span></div>`;
+    $("#siwc-login")?.addEventListener("click", () => call("siwc.login").then(() => toast("Continue sign-in in browser", "good"), e => toast("ChatGPT: " + e.message, "bad")));
     $("#sideFoot").querySelectorAll("[data-go]").forEach(n => n.onclick = () => go({ type: n.dataset.go }));
     $("#sideFoot").querySelectorAll("[data-mode]").forEach(b => b.onclick = () => setLlmMode(b.dataset.mode));
     $("#sideFoot").querySelectorAll("[data-theme-pick]").forEach(b => b.onclick = () => { Theme.set(b.dataset.themePick); renderSide(); });
